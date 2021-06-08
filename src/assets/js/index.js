@@ -2,7 +2,6 @@ import generateCore from './core.js';
 const core = generateCore()
 
 try{
-
     core.start();
 
 }catch(e){

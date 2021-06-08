@@ -6,25 +6,52 @@ function create() {
         );
     }
 
-    function zeroLeft(num){
-        return num <= 10 ? `0${num}` : num
+    function zeroLeft(max, zero, num) {
+        return num <= max ? `${zero}${num}` : num
     }
 
     function date() {
         let dNow = new Date();
-        let dd = zeroLeft(dNow.getDate());
-        let mm = zeroLeft(dNow.getMonth()+1);
-        let yyyy = zeroLeft(dNow.getFullYear());
+        let dd = zeroLeft(10, '0', dNow.getDate());
+        let mm = zeroLeft(10, '0', dNow.getMonth() + 1);
+        let yyyy = zeroLeft(10, '0', dNow.getFullYear());
         let localdate = `${dd}/${mm}/${yyyy}`;
         return localdate;
     }
-    
+
     function hour() {
         let dNow = new Date();
-        let hr = zeroLeft(dNow.getHours());
-        let m = zeroLeft(dNow.getMinutes());
+        let hr = zeroLeft(10, '0', dNow.getHours());
+        let m = zeroLeft(10, '0', dNow.getMinutes());
         let localdate = `${hr}:${m}`;
         return localdate;
+    }
+
+    function ticket(setor, tipo, number) {
+        let set
+        if (setor === 'Caixa') {
+            if (tipo === 'Prioridade') {
+                set = 'CXP'
+            } else {
+                set = 'CXC'
+            }
+        } else if (setor === 'Guichê') {
+            if (tipo === 'Prioridade') {
+                set = 'GHP'
+            } else {
+                set = 'GHC'
+            }
+        } else if (setor === 'Gerência') {
+            if (tipo === 'Prioridade') {
+                set = 'GEP'
+            } else {
+                set = 'GEC'
+            }
+        } else if (setor === 'Acompanhamento') {
+            set = 'Acompanhamento'
+            return `${set}`
+        }
+        return `${set}${zeroLeft(100, '00', number)}`
     }
 
 
@@ -32,9 +59,9 @@ function create() {
         uuidv4,
         date,
         hour,
+        ticket,
     }
 
 }
 
 export default create;
-

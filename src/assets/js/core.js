@@ -1,8 +1,7 @@
 import generateCreate from './create.js';
+const create = generateCreate();
 
 function Core() {
-    const create = generateCreate();
-
 
     function start() {
         getClicks();
@@ -26,21 +25,25 @@ function Core() {
 
     function setAtendimentoType(value) {
         data.tipo = value
-        // console.log(data)
+        // document.querySelector('.firstPage').style.display = 'none';
+        // document.querySelector('.secondPage').style.display = 'initial';
     }
 
     function setAtendimentoSection(value) {
         data.setor = value
-        // console.log(data)
 
-        // document.getElementById('atendimentoSection').style.display = 'none';
-        // document.getElementById('ticketSection').style.display = 'initial';
-
+        // document.querySelector('.secondPage').style.display = 'none';
+        // document.querySelector('.thirdPage').style.display = 'initial';
 
     }
 
+    let number = 0
+
     function enviarDados() {
         console.log(data)
+        number += 1
+        data.senha = create.ticket(data.setor, data.tipo, number) 
+
         let url = "http://localhost:5000/atendimento";
 
         fetch(url, {
@@ -50,25 +53,21 @@ function Core() {
             },
             body: JSON.stringify(data)
         });
+        document.querySelector('.uuid').innerHTML = data.id
+        document.querySelector('.senha').innerHTML = data.senha
+        document.querySelector('.tipo').innerHTML = data.tipo
+        document.querySelector('.date').innerHTML = data.data
+        document.querySelector('.hora').innerHTML = data.hora
+        document.querySelector('.setor').innerHTML = data.setor
 
-        document.getElementsByClassName('uuid').innerHTML = data.id
-        document.getElementsByClassName('senha').innerText = "TESTE"
-        document.getElementsByClassName('tipo').innerText = data.tipo
-        document.getElementsByClassName('data').innerText = data.data
-        document.getElementsByClassName('hora').innerText = data.hora
+        setTimeout(function () {
 
-        // setTimeout(function () {
+            // document.querySelector('.finalPage').style.display = 'none';
+            // document.querySelector('.firstPage').style.display = 'initial';
 
-        //     document.getElementById('finalScreen').style.display = 'none';
-        //     document.getElementById('atendimentoType').style.display = 'initial';
-
-        // }, 3000); //delay is in milliseconds 
+        }, 3000);
 
     }
-
-
-
-
 
 
     return {
