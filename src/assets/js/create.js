@@ -39,11 +39,12 @@ function create() {
     }
     
     function attendancePanel(fila){
+        let groupPessoas = document.querySelector('.groupPessoas')
+        console.log(fila)
+        groupPessoas.innerHTML = ''   
         for(let pessoa in fila){
-            let groupPessoas = document.querySelector('.groupPessoas')
             groupPessoas.insertAdjacentHTML('beforeend',
-            `<div class="pessoa"><p class="senha">${fila[pessoa].senha}</p><p class="caixa">${fila[pessoa].caixa}</p></div>`)
-            console.log(fila[pessoa])
+            `<div class="pessoa"><p class="senha">${fila[pessoa].senha}</p><p class="caixa">${fila[pessoa].caixa}</p></div><hr>`)
         }
     }
 

@@ -37,7 +37,7 @@ function Core() {
     }
 
     let number = 0
-    let fila
+    let fila = new Array();
 
     function enviarDados() {
         number += 1
@@ -68,8 +68,17 @@ function Core() {
             create.attendancePanel(fila)
 
         }, 1000);
-        
+
     }
+
+    function atualizar() {
+        setTimeout(function () {
+            alert(fila)
+            create.attendancePanel(fila)
+
+        }, 2000)
+    }
+
 
     return {
         start,
