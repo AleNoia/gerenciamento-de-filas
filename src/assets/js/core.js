@@ -9,9 +9,6 @@ function Core() {
 
     let data = new Object();
 
-    data.data = create.date();
-    data.hora = create.hour();
-
     function getClicks() {
         document.addEventListener('click', e => {
             const el = e.target
@@ -44,6 +41,8 @@ function Core() {
         data.id = create.uuidv4();
         data.caixa = create.setCashier();
         data.number = create.zeroLeft(100, '00', number)
+        data.data = create.date();
+        data.hora = create.hour();
 
         let url = "http://localhost:5000/atendimento";
 
@@ -70,15 +69,6 @@ function Core() {
         }, 1000);
 
     }
-
-    function atualizar() {
-        setTimeout(function () {
-            alert(fila)
-            create.attendancePanel(fila)
-
-        }, 2000)
-    }
-
 
     return {
         start,

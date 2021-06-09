@@ -10,13 +10,14 @@ function create() {
         return num <= max ? `${zero}${num}` : num
     }
 
-    let now = new Date();
-
+    
     function date() {
+        let now = new Date();
         return now.toLocaleDateString();
     }
-
+    
     function hour() {
+        let now = new Date();
         let hr = zeroLeft(10, '0', now.getHours());
         let m = zeroLeft(10, '0', now.getMinutes());
         let localdate = `${hr}:${m}`;
