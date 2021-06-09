@@ -11,7 +11,6 @@ function Core() {
 
     data.data = create.date();
     data.hora = create.hour();
-    data.id = create.uuidv4();
 
     function getClicks() {
         document.addEventListener('click', e => {
@@ -42,9 +41,18 @@ function Core() {
     function enviarDados() {
         console.log(data)
         number += 1
-        data.senha = create.ticket(data.setor, data.tipo, number) 
+        data.id = create.uuidv4();
+        data.caixa = create.setCashier();
+        data.number = create.zeroLeft(100, '00', number)
 
         let url = "http://localhost:5000/atendimento";
+
+        document.querySelector('.uuid').innerHTML = data.id
+        document.querySelector('.senha').innerHTML = data.senha
+        document.querySelector('.tipo').innerHTML = data.tipo
+        document.querySelector('.date').innerHTML = data.data
+        document.querySelector('.hora').innerHTML = data.hora
+        document.querySelector('.setor').innerHTML = data.setor
 
         fetch(url, {
             method: "POST",
@@ -53,12 +61,19 @@ function Core() {
             },
             body: JSON.stringify(data)
         });
-        document.querySelector('.uuid').innerHTML = data.id
-        document.querySelector('.senha').innerHTML = data.senha
-        document.querySelector('.tipo').innerHTML = data.tipo
-        document.querySelector('.date').innerHTML = data.data
-        document.querySelector('.hora').innerHTML = data.hora
-        document.querySelector('.setor').innerHTML = data.setor
+
+        (async function getFila() {
+            let response = await fetch(url)
+            let fila = await response.json()
+            fila.forEach(function (el, i) {
+                if(el.id === data.id) 
+                let element = el.id === data.id
+                console.log(el)
+            })
+            // console.log(fila)
+        })();
+
+
 
         setTimeout(function () {
 
