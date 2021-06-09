@@ -29,12 +29,32 @@ function create() {
         return zeroLeft(100, '00', Math.floor(Math.random() * (max - min + 1)) + min)
     }
 
+    function informations(arrayFila) {
+        document.querySelector('.uuid').innerHTML = arrayFila.id
+        document.querySelector('.senha').innerHTML = arrayFila.senha
+        document.querySelector('.tipo').innerHTML = arrayFila.tipo
+        document.querySelector('.date').innerHTML = arrayFila.data
+        document.querySelector('.hora').innerHTML = arrayFila.hora
+        document.querySelector('.setor').innerHTML = arrayFila.setor
+    }
+    
+    function attendancePanel(fila){
+        for(let pessoa in fila){
+            let groupPessoas = document.querySelector('.groupPessoas')
+            groupPessoas.insertAdjacentHTML('beforeend',
+            `<div class="pessoa"><p class="senha">${fila[pessoa].senha}</p><p class="caixa">${fila[pessoa].caixa}</p></div>`)
+            console.log(fila[pessoa])
+        }
+    }
+
     return {
         uuidv4,
         date,
         hour,
         setCashier,
         zeroLeft,
+        informations,
+        attendancePanel,
     }
 
 }
