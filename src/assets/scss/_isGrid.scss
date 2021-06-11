@@ -1,0 +1,20 @@
+// ======================================== [VARIABLES]
+$grid-gutter: 1%; 
+$grid-columns: 12; 
+$grid-max: 980px; 
+
+// ======================================== [GRID]
+* {
+    box-sizing: border-box;
+}
+[class*="grid-"] {
+  float: left;
+  margin-bottom: 20px;
+  padding: 0 $grid-gutter;
+}
+
+@for $i from 1 through $grid-columns{ 
+  .grid-#{$i} {
+    width: 100% / $grid-columns * $i;
+  }
+}

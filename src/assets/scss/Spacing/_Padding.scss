@@ -1,0 +1,51 @@
+//================================================================ [VARIABLES]
+$NumOfClass: 7;
+$SpacingEm: 0.4;
+
+// ================================ Padding
+@for $i from 0 through $NumOfClass{
+    .p-#{$i * 1}{
+        padding: #{$i * $SpacingEm}em;
+    }
+}
+// ================================ X-axis padding
+@for $i from 0 through $NumOfClass{
+    .px-#{$i * 1}{
+        padding: 0 #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Y-axis padding
+@for $i from 0 through $NumOfClass{
+    .py-#{$i * 1}{
+        padding: #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Padding on top
+@for $i from 0 through $NumOfClass{
+    .pt-#{$i * 1}{
+        padding-top: #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Padding on bottom
+@for $i from 0 through $NumOfClass{
+    .pb-#{$i * 1}{
+        padding-bottom: #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Padding on left
+@for $i from 0 through $NumOfClass{
+    .pl-#{$i * 1}{
+        padding-left: #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Padding on right
+@for $i from 0 through $NumOfClass{
+    .pr-#{$i * 1}{
+        padding-right: #{$i * $SpacingEm}em;
+    }
+}

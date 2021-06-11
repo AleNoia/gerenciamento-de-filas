@@ -9,6 +9,7 @@ function Core() {
 
     let data = new Object();
 
+    // Ouvindo os eventos
     function getClicks() {
         document.addEventListener('click', e => {
             const el = e.target
@@ -19,32 +20,37 @@ function Core() {
         })
     }
 
+    // Tipo de atendimento
     function setAtendimentoType(value) {
         data.tipo = value
-        // document.querySelector('.firstPage').style.display = 'none';
-        // document.querySelector('.secondPage').style.display = 'initial';
+        document.querySelector('.firstPage').style.display = 'none';
+        document.querySelector('.secondPage').style.display = 'initial';
     }
 
+    // Setor do atendimento
     function setAtendimentoSection(value) {
         data.setor = value
 
-        // document.querySelector('.secondPage').style.display = 'none';
-        // document.querySelector('.thirdPage').style.display = 'initial';
-
+        document.querySelector('.secondPage').style.display = 'none';
+        document.querySelector('.thirdPage').style.display = 'initial';
+        create.informations(data)
     }
 
     let number = 0
-    let fila = new Array();
+    let fila
+    let url = "http://localhost:5000/atendimento";
 
+    // Pengando informações da fila
+    create.getQueue(url, fila, data)
+
+    // Enviando os dados
     function enviarDados() {
         number += 1
+        console.log(number)
         data.id = create.uuidv4();
         data.caixa = create.setCashier();
-        data.number = create.zeroLeft(100, '00', number)
         data.data = create.date();
         data.hora = create.hour();
-
-        let url = "http://localhost:5000/atendimento";
 
         fetch(url, {
             method: "POST",
@@ -54,19 +60,15 @@ function Core() {
             body: JSON.stringify(data)
         });
 
-        setTimeout(async function () {
-            let response = await fetch(url)
-            fila = await response.json()
-            let arrayFila = fila.filter(function (value) {
-                if (value.id == data.id) {
-                    return value
-                }
-            })
+        create.getQueue(url, fila, data, true) // Pengando dados da fila
 
-            create.informations(arrayFila[0])
-            create.attendancePanel(fila)
-
-        }, 1000);
+        document.querySelector('.thirdPage').style.display = 'none';
+        document.querySelector('.fourthPage').style.display = 'initial';
+        
+        setTimeout(function (){
+            document.querySelector('.fourthPage').style.display = 'none';
+            document.querySelector('.firstPage').style.display = 'initial';
+        }, 5000)
 
     }
 

@@ -1,0 +1,69 @@
+// ======================================== [IMPORTS]
+@import '../_shadow.scss';
+@import '../_colors.scss';
+@import '../_transition.scss';
+
+// ======================================== [BUTTONS]
+.btn {
+    height: 47px;
+    padding: 0 1.7em;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px; 
+    transition: $transition-1;
+    background-color: hsl(0, 0%, 100%);
+    box-shadow: $shadow-1;
+    color: #fff;
+    font-size: 16px;
+
+    i {
+        color: hsl(0, 0%, 100%) !important;
+    }
+
+    // &:hover {
+    //     transform: scale(0.97);
+    // }
+
+    &:active {
+        transform: scale(0.85);
+    }
+}
+
+// ========== [PRIMARY]
+.btn-primary {
+    background-image: $gradient-1;
+}
+
+// ========== [SECONDARY]
+.btn-secondary {
+    background-image: $color-secondary;
+    color: #343a40;
+}
+
+// ========== [SUCCESS]
+.btn-success {
+    background-image: $color-success;
+}
+
+// ========== [DANGER]
+.btn-danger {
+    background-image: $color-danger;
+}
+
+// ========== [TO UP]
+.btn-up {
+
+    &:hover {
+        box-shadow: $shadow-1;
+        transform: scale(1.1);
+
+        i {
+            transform: scale(1.2);
+        }
+    }
+
+    &:active {
+        transform: scale(0.99);
+        outline: none;
+    }
+}

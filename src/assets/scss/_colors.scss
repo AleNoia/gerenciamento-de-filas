@@ -1,0 +1,20 @@
+// ======================================== [COLORS PROJECT]
+$color-1: #08A0EB;
+$color-2: #0C8C9F;
+$color-3: #4CC9F0;
+$color-4: #cbf3ff;
+$color-5: rgba(0, 0, 0, 0.2);
+$color-6: #047ABA;
+
+// ======================================== [GRADIENT PROJECT]
+$gradient-1:  linear-gradient(to right top, #35a293, #00a3ab, #00a2c4, #009fda, #0598e9);
+$gradient-2: linear-gradient(to left right, #35a293, #00a3ab, #00a2c4, #009fda, #0598e9);
+$gradient-border-1: linear-gradient(to right bottom, hsla(0, 0%, 100%, 0), hsl(0, 0%, 100%)) 1;
+$gradient-border-2: linear-gradient(to left top, #9EF5FF, #23B1D9) 1;
+
+// ======================================== [COLORS BUTTONS]
+
+$color-primary: linear-gradient(to right bottom, #0069d9, #1374e1, #2280ea, #2f8bf1, #3b97f9);
+$color-secondary: hsla(0, 0%, 100%, 0);
+$color-success: linear-gradient(to right bottom, #00b027, #09ba2f, #11c536, #17cf3e, #1cda45);
+$color-danger: linear-gradient(to right bottom, #c82333, #d53341, #e1424f, #ed505d, #f95d6c);

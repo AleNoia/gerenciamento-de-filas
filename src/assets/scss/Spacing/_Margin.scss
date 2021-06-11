@@ -1,0 +1,52 @@
+//================================================================ [VARIABLES]
+$NumOfClass: 7;
+$SpacingEm: 0.4;
+
+// ================================ Margin
+@for $i from 0 through $NumOfClass{
+    .m-#{$i * 1}{
+        margin: #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ X-axis margin
+@for $i from 0 through $NumOfClass{
+    .mx-#{$i * 1}{
+        margin: 0 #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Y-axis margin
+@for $i from 0 through $NumOfClass{
+    .my-#{$i * 1}{
+        margin: #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Margin on top
+@for $i from 0 through $NumOfClass{
+    .mt-#{$i * 1}{
+        margin-top: #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Margin on bottom
+@for $i from 0 through $NumOfClass{
+    .mb-#{$i * 1}{
+        margin-bottom: #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Margin on left
+@for $i from 0 through $NumOfClass{
+    .ml-#{$i * 1}{
+        margin-left: #{$i * $SpacingEm}em;
+    }
+}
+
+// ================================ Margin on right
+@for $i from 0 through $NumOfClass{
+    .mr-#{$i * 1}{
+        margin-right: #{$i * $SpacingEm}em;
+    }
+}

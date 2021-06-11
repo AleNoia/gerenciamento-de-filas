@@ -1,0 +1,62 @@
+// ======================================== [IMPORTS]
+@import './colors';
+@import './isFlex';
+@import './isGrid';
+@import './transition';
+@import './Components/navbarVertical';
+@import './Components/card';
+
+.secondPage, .thirdPage, .fourthPage{
+    display: none;
+}
+
+.navbarVertical{
+    @include navbarVertical-1();
+}
+
+main{
+    padding: 4em;
+}
+body{
+    background-color: $color-4;
+}
+
+.buttonsGroup{
+    @include is-flex(center, center);
+}
+
+.firstPage{
+    button{
+        height: 250px;
+        width: 40%;
+        font-size: 28px;
+        margin-bottom: .4em;
+    }
+}
+
+.secondPage{
+    button{
+        height: 200px;
+        width: 40%;
+        font-size: 28px;
+        margin-bottom: .4em;
+    }
+}
+
+.thirdPage{
+    h2{
+        font-size: 22px;
+        opacity: .9;
+    }
+
+    .buttonsGroup{
+        @include is-flex(center, flex-end);
+    }
+}
+
+
+.tit{
+    font-weight: bold;
+    margin-bottom: .3em;
+    opacity: .8;
+}

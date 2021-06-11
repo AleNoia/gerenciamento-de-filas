@@ -5,75 +5,94 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGF — Sistema de Gerenciamento de Filas</title>
+    <title>SGF - Sistema de Gerenciamento de Filas</title>
+    <link rel="stylesheet" href="./assets/scss/mainUseful.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <main>
+        <section class="firstPage">
+            <h1 class="mb-3">Informe o tipo de atendimento</h1>
+            <div class="buttonsGroup">
+                <button class="btn btn-primary btnAtendimentoType mr-1" value="Convencional">Convencional</button>
+                <button class="btn btn-primary btnAtendimentoType" value="Prioridade">Prioridade</button>
+            </div>
+        </section>
 
-    <section class="firstPage">
-        <h1>SISTEMA DE GESTÃO DE FILAS-SGF</h1>
-        <h2>Informe o tipo de atendimneto</h2>
-        <hr>
-        <div class="buttonsGroup">
-            <button class="btn btnAtendimentoType" value="Convencional">Convencional</button>
-            <button class="btn btnAtendimentoType" value="Prioridade">Prioridade</button>
+        <section class="secondPage">
+            <h1 class="mb-3">Informe o setor para o atendimento</h1>
+            <div class="buttonsGroup">
+                <button class="btn btn-primary btnAtendimento mr-1" value="Caixa">Caixa</button>
+                <button class="btn btn-primary btnAtendimento" value="Guichê">Guichê</button>
+                <button class="btn btn-primary btnAtendimento mr-1" value="Gerência">Gerência</button>
+                <button class="btn btn-primary btnAtendimento" value="Acompanhamento">Acompanhamento</button>
+            </div>
+        </section>
+
+        <section class="thirdPage">
+            <div class="card">
+                <h1 class="mb-2">Gerar Ticket</h1>
+                <h2 class="mb-1">Setor</h2>
+                <p class="setor mb-2"></p>
+                <h2 class="mb-1">Tipo</h2>
+                <p class="tipo"></p>
+                <div class="buttonsGroup">
+                    <button class="btn btn-primary enviar">Gerar ticket</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="fourthPage">
+            <div class="card">
+                <h1>Atendimento finalizado</h1>
+                <p class="uuid"></p>
+            </div>
+        </section>
+    </main>
+
+    <nav class="navbarVertical finalPage">
+        <div class="navbarContent">
+            <div class="navBrand">
+                <h1 class="mb-1">Sistema de Gestão de Fila</h1>
+                <h3>Painel de Acompanhamento</h3>
+            </div>
+            <ul class="namesList groupPessoas">
+            </ul>
         </div>
-    </section>
+    </nav>
 
-    <hr>
-
-    <section class="secondPage">
-        <div class="buttonsGroup">
-            <button class="btn btnAtendimento" value="Caixa">Caixa</button>
-            <button class="btn btnAtendimento" value="Guichê">Guichê</button>
-            <button class="btn btnAtendimento" value="Gerência">Gerência</button>
-            <button class="btn btnAtendimento" value="Acompanhamento">Acompanhamento</button>
+    <footer class="footer">
+        <div class="column">
+            <h1>Sistema de Gestão de Filas</h1>
         </div>
-    </section>
-
-    <hr>
-
-    <section class="thirdPage">
-        <h5>Sistema de Gestão de Filas</h5>
-        <hr>
-        <h5>BANCO NOSSO CRÉDITO</h5>
-        <p>Av. Principal Nº 100, Centro</p>
-        <p>Fone (86) 9 3223-3232</p>
-        <hr>
-        <label style="display: block;">Senha</label>
-        <p class="senha"></p>
-        <label style="display: block;">Setor</label>
-        <p class="setor"></p>
-        <label style="display: block;">Tipo</label>
-        <p class="tipo"></p>
-        <label style="display: block;">Data</label>
-        <p class="date"></p>
-        <label style="display: block;">Hora</label>
-        <p class="hora"></p>
-        <hr>
-        <div class="buttonsGroup">
-            <button class="btn enviar">Enviar</button>
+        <div class="column">
+            <h1>Banco Nosso Crédito</h1>
+            <h3 class="tit">Endereço</h3>
+            <h2 class="mb-1">EndereçoAv. Principal Nº 100, Centro</h2>
+            <h3 class="tit">Fone</h3>
+            <h2>(86) 9 3223-3232</h2>
         </div>
-    </section>
-
-    <hr>
-
-    <section class="fourthPage">
-        <h1>Atendimento finalizado</h1>
-        <p class="uuid"></p>
-    </section>
-
-    <hr>
-
-    <section class="finalPage">
-        <h1>Painel de Acompanhamento</h1>
-        <div class="groupPessoas">
-            <div class="pessoa">
-                <p class="senha"></p>
-                <p class="caixa"></p>
+        <div class="column">
+            <h1>Desenvolvedores</h1>
+            <div class="mb-3">
+                <h2 class="mb-1">Alexandre Igor Noia Lacerda Silva</h2>
+                <h3 class="tit">Matrícula</h3>
+                <h2>201908412534</h2>
+            </div>
+            <div class="mb-3">
+                <h2 class="mb-1">Raquel Martins Nunes</h2>
+                <h3 class="tit">Matrícula</h3>
+                <h2>201908343222</h2>
+            </div>
+            <div class="mb-3">
+                <h2 class="mb-1">Alexandre Igor Noia Lacerda Silva</h2>
+                <h3 class="tit">Matrícula</h3>
+                <h2>201908412534</h2>
             </div>
         </div>
-    </section>
+    </footer>
 
 
     <script type="module" src="./assets/js/index.js"></script>
