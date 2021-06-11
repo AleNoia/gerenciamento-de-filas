@@ -20,14 +20,14 @@ function Core() {
         })
     }
 
-    // Tipo de atendimento
+    // Pegando o tipo de atendimento
     function setAtendimentoType(value) {
         data.tipo = value
         document.querySelector('.firstPage').style.display = 'none';
         document.querySelector('.secondPage').style.display = 'initial';
     }
 
-    // Setor do atendimento
+    // Pegando o setor do atendimento
     function setAtendimentoSection(value) {
         data.setor = value
 
@@ -43,14 +43,14 @@ function Core() {
     // Pengando informações da fila
     create.getQueue(url, fila, data)
 
-    // Enviando os dados
+    // Enviando os dados    
     function enviarDados() {
         number += 1
-        console.log(number)
         data.id = create.uuidv4();
         data.caixa = create.setCashier();
         data.data = create.date();
         data.hora = create.hour();
+        data.time = new Date();
 
         fetch(url, {
             method: "POST",
@@ -68,7 +68,7 @@ function Core() {
         setTimeout(function (){
             document.querySelector('.fourthPage').style.display = 'none';
             document.querySelector('.firstPage').style.display = 'initial';
-        }, 5000)
+        }, 1000)
 
     }
 

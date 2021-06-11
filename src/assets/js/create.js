@@ -8,7 +8,7 @@ function create() {
 
     // Insere zeros antes do número
     function zeroLeft(max, zero, num) {
-        return num <= max ? `${zero}${num}` : num
+        return num < max ? `${zero}${num}` : num
     }
 
     // Retorna a data
@@ -58,6 +58,11 @@ function create() {
 
         }, 1000);
     }
+
+    // // Ordenar Fila
+    // function orderQueue(){
+
+    // }
 
     // Gera o Painel de Acompanhamento
     function attendancePanel(fila) {

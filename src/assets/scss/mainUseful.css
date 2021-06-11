@@ -784,6 +784,10 @@ table {
   font-size: 14px;
 }
 
+.footer .column > * {
+  max-width: 75%;
+}
+
 .footer span {
   color: white;
 }
