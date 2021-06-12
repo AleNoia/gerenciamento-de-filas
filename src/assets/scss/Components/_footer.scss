@@ -26,7 +26,6 @@
 
     .column{
         @extend .grid-4;
-        // background-color: red;
         & > *{
             max-width: 75%;
         }   

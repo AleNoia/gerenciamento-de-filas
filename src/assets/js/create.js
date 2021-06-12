@@ -42,7 +42,8 @@ function create() {
         // document.querySelector('.hora').innerHTML = arrayFila.hora
         document.querySelector('.setor').innerHTML = arrayFila.setor
     }
-
+    
+    // Obtendo dados da fila
     function getQueue(url, fila, data, thirdPage) {
         setTimeout(async function () {
             let response = await fetch(url)
@@ -59,19 +60,14 @@ function create() {
         }, 1000);
     }
 
-    // // Ordenar Fila
-    // function orderQueue(){
-
-    // }
-
     // Gera o Painel de Acompanhamento
     function attendancePanel(fila) {
-        let groupPessoas = document.querySelector('.groupPessoas')
+        let groupClients = document.querySelector('.groupClients')
         console.log(fila)
-        groupPessoas.innerHTML = ''
-        for (let pessoa in fila) {
-            groupPessoas.insertAdjacentHTML('beforeend',
-                `<div class="pessoa navItem"><p class="tit">Senha</p><p class="senha mb-2">${fila[pessoa].senha}</p><p class="tit mb-1">Caixa</p><p class="caixa">${fila[pessoa].caixa}</p></div>`)
+        groupClients.innerHTML = ''
+        for (let client in fila) {
+            groupClients.insertAdjacentHTML('beforeend',
+                `<div class="client navItem"><p class="tit">Senha</p><p class="senha mb-2">${fila[client].senha}</p><p class="tit mb-1">Caixa</p><p class="caixa">${fila[client].caixa}</p></div>`)
         }
     }
 
