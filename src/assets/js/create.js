@@ -42,14 +42,21 @@ function create() {
         // document.querySelector('.hora').innerHTML = arrayFila.hora
         document.querySelector('.setor').innerHTML = arrayFila.setor
     }
+
+    // Obetendo fila
+    async function getQueueGeral(url) {
+        let response = await fetch(url)
+        return await response.json()
+    }
     
-    // Obtendo dados da fila
+    
+    // Obtendo dados da fila para as páginas
     function getQueue(url, fila, data, thirdPage) {
         setTimeout(async function () {
-            let response = await fetch(url)
-            fila = await response.json()
+            fila = await getQueueGeral(url)
             let arrayFila = fila.filter(function (value) {
                 if (value.id == data.id) {
+                    console.log(value)
                     return value
                 }
             })
@@ -60,6 +67,11 @@ function create() {
         }, 1000);
     }
 
+    // Filtrando o painel de acompanhamento para o setor Caixa
+    function getQueueCaixa(url, fila){
+        let fila = await getQueueGeral(url)
+    }
+
     // Gera o Painel de Acompanhamento
     function attendancePanel(fila) {
         let groupClients = document.querySelector('.groupClients')
@@ -67,7 +79,7 @@ function create() {
         groupClients.innerHTML = ''
         for (let client in fila) {
             groupClients.insertAdjacentHTML('beforeend',
-                `<div class="client navItem"><p class="tit">Senha</p><p class="senha mb-2">${fila[client].senha}</p><p class="tit mb-1">Caixa</p><p class="caixa">${fila[client].caixa}</p></div>`)
+                `<div class="client navItem"><p class="senha">${fila[client].senha}</p><p class="tit">Senha</p></div>`)
         }
     }
 
@@ -80,6 +92,7 @@ function create() {
         informations,
         attendancePanel,
         getQueue,
+        // getQueueCaixa,
     }
 
 }

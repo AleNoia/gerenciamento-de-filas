@@ -34,6 +34,7 @@ main {
 
     hr{
         border-color: rgba(255, 255, 255, .3);
+        margin-bottom: .8em;
     }
 
     &:hover {
@@ -54,13 +55,27 @@ main {
         @include is-flex(center, flex-start);
         padding: .8em 0;
         font-size: 28px;
-
+        
         i {
             margin-right: .4em;
         }
-
+        
         h3{
             font-size: 22px;
+        }
+    }
+
+    // ========== [OPTIONS]
+    .options{
+        margin-bottom: .8em;    
+        display: flex;
+        flex: 1;
+        // flex-wrap: wrap;
+        
+        .btn-primary{
+            width: 100%;
+            margin-right: .4em;
+            padding: 0 0;
         }
     }
 

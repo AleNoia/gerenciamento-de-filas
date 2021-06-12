@@ -10,15 +10,18 @@ function Core() {
     // Array que será enviado para o back
     let data = new Object(); 
 
+
     // Ouvindo os eventos
     function getClicks() {
         document.addEventListener('click', e => {
             const el = e.target
             if (el.classList.contains('btnAtendimentoType')) getAtendimentoType(el.value)
             if (el.classList.contains('btnAtendimento')) getAtendimentoSection(el.value)
+            if (el.classList.contains('btnAcompanhamento')) setAcompanhamento(el.value)
             if (el.classList.contains('enviar')) sendData()
         })
     }
+
 
     // Pegando o tipo de atendimento
     function getAtendimentoType(value) {
@@ -29,6 +32,7 @@ function Core() {
         document.querySelector('.secondPage').style.display = 'initial';
     }
     
+
     // Pegando o setor do atendimento
     function getAtendimentoSection(value) {
         data.setor = value
@@ -39,13 +43,25 @@ function Core() {
         create.informations(data) // Criando informações da última página
     }
     
+
     // Variáveis para o envio de dados para o back
     let number = 0 // Número para ticket
     let fila
     let url = "http://localhost:5000/atendimento";
     
+
     // Pengando informações da fila assim que o projeto for inciado
     create.getQueue(url, fila, data)
+    
+
+    // Filtrando fila de acordo com o setor
+    function setAcompanhamento(value){
+        if (value === 'geral') create.getQueue(url, fila, data)
+        if (value === 'caixa') create.getQueueCaixa(url, fila)
+        // if (value === 'guiche') create.getQueueGuiche(url, fila, data)
+        // if (value === 'gerencia') create.getQueueGerencia(url, fila, data)
+    }
+
 
     // Enviando os dados    
     function sendData() {
@@ -79,6 +95,7 @@ function Core() {
         }, 1000)
 
     }
+
 
     return {
         start,
