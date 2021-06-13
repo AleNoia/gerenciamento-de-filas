@@ -21,6 +21,7 @@ main {
     @include scroll-2();
     height: 100vh;
     padding: 2em;
+    padding-left: 17px;
     overflow-y: hidden;
     transition: $transition-2;
     position: sticky;
@@ -47,6 +48,7 @@ main {
 
     .navbarContent {
         padding-right: 17px;
+        min-height: 100vh;
     }
 
 
@@ -72,10 +74,11 @@ main {
         flex: 1;
         // flex-wrap: wrap;
         
-        .btn-primary{
+        .btn-secondary{
             width: 100%;
             margin-right: .4em;
             padding: 0 0;
+            // background-color: $color-7;
         }
     }
 

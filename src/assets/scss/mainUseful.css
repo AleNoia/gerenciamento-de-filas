@@ -631,8 +631,7 @@ table {
 }
 
 .btn-secondary {
-  background-image: rgba(255, 255, 255, 0);
-  color: #343a40;
+  background-color: #19cf92;
 }
 
 .btn-success {
@@ -1032,6 +1031,7 @@ body {
 .navbarVertical {
   height: 100vh;
   padding: 2em;
+  padding-left: 17px;
   overflow-y: hidden;
   -webkit-transition: ease 0.25s;
   transition: ease 0.25s;
@@ -1076,6 +1076,7 @@ body {
 
 .navbarVertical .navbarContent {
   padding-right: 17px;
+  min-height: 100vh;
 }
 
 .navbarVertical .navBrand {
@@ -1112,7 +1113,7 @@ body {
           flex: 1;
 }
 
-.navbarVertical .options .btn-primary {
+.navbarVertical .options .btn-secondary {
   width: 100%;
   margin-right: .4em;
   padding: 0 0;
@@ -1153,9 +1154,11 @@ body {
       flex-wrap: wrap;
 }
 
-.firstPage button {
+.firstPage button, .secondPage button {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   height: 250px;
-  width: 40%;
   font-size: 28px;
   margin-bottom: .4em;
 }
@@ -1187,12 +1190,12 @@ body {
 }
 
 .tit {
-  font-weight: bold;
   margin-bottom: .3em;
   opacity: .8;
 }
 
 .senha {
+  font-weight: bold;
   font-size: 22px;
   margin-bottom: .2em;
 }

@@ -51,15 +51,15 @@ function Core() {
     
 
     // Pengando informações da fila assim que o projeto for inciado
-    create.getQueue(url, fila, data)
+    create.setDataPages(url, fila, data)
     
 
     // Filtrando fila de acordo com o setor
     function setAcompanhamento(value){
-        if (value === 'geral') create.getQueue(url, fila, data)
-        if (value === 'caixa') create.getQueueCaixa(url, fila)
-        // if (value === 'guiche') create.getQueueGuiche(url, fila, data)
-        // if (value === 'gerencia') create.getQueueGerencia(url, fila, data)
+        if (value === 'geral') create.setGeral(url)
+        if (value === 'caixa') create.setQueueCaixa(url, fila)
+        if (value === 'guiche') create.setQueueGuiche(url, fila)
+        if (value === 'gerencia') create.setQueueGerencia(url, fila)
     }
 
 
@@ -82,7 +82,7 @@ function Core() {
             body: JSON.stringify(data)
         });
 
-        create.getQueue(url, fila, data, true) // Atualizando dados da fila
+        create.setDataPages(url, fila, data, true) // Atualizando dados da fila
         
         // Passando para a próxima página
         document.querySelector('.thirdPage').style.display = 'none';

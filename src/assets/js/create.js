@@ -43,17 +43,17 @@ function create() {
         document.querySelector('.setor').innerHTML = arrayFila.setor
     }
 
-    // Obetendo fila
-    async function getQueueGeral(url) {
+    // Obtendo fila
+    async function getQueue(url) {
         let response = await fetch(url)
         return await response.json()
     }
     
     
-    // Obtendo dados da fila para as páginas
-    function getQueue(url, fila, data, thirdPage) {
+    // Inserindo dados da fila nas páginas
+    function setDataPages(url, fila, data, thirdPage) {
         setTimeout(async function () {
-            fila = await getQueueGeral(url)
+            fila = await getQueue(url)
             let arrayFila = fila.filter(function (value) {
                 if (value.id == data.id) {
                     console.log(value)
@@ -67,9 +67,45 @@ function create() {
         }, 1000);
     }
 
-    // Filtrando o painel de acompanhamento para o setor Caixa
-    function getQueueCaixa(url, fila){
-        let fila = await getQueueGeral(url)
+    // Filtrando fila para um setor determinado
+    async function setQueue(url, setor, toPanel){
+        let fila = await getQueue(url)
+
+        function checkSenha(value){
+
+            let l1 = value.senha.split('')[0]
+            let l2 = value.senha.split('')[1]
+            let letter = l1+l2
+
+            if (letter == setor) return value
+        }
+
+        
+        let newFila = fila.filter(checkSenha)
+
+        if(toPanel) attendancePanel(newFila) // Para o painel de acompanhamento
+        
+        console.log(newFila)
+    }
+    
+    // Filtrando setor Caixa
+    async function setGeral(url){
+        attendancePanel(await getQueue(url))
+    }
+
+    // Filtrando setor Caixa
+    async function setQueueCaixa(url){
+        setQueue(url, 'CX', true)
+    }
+    
+    // Filtrando setor Guichê
+    async function setQueueGuiche(url){
+        setQueue(url, 'GH', true)
+    }
+    
+    // Filtrando setor Gerencia
+    async function setQueueGerencia(url){
+         setQueue(url, 'GE', true)
     }
 
     // Gera o Painel de Acompanhamento
@@ -79,7 +115,11 @@ function create() {
         groupClients.innerHTML = ''
         for (let client in fila) {
             groupClients.insertAdjacentHTML('beforeend',
-                `<div class="client navItem"><p class="senha">${fila[client].senha}</p><p class="tit">Senha</p></div>`)
+                `<div class="client navItem">
+                    <p class="senha">${fila[client].senha}</p>
+                    <p class="tit">Senha</p>
+                </div>
+                `)
         }
     }
 
@@ -91,8 +131,11 @@ function create() {
         zeroLeft,
         informations,
         attendancePanel,
-        getQueue,
-        // getQueueCaixa,
+        setDataPages,
+        setQueueCaixa,
+        setQueueGuiche,
+        setQueueGerencia,
+        setGeral
     }
 
 }
