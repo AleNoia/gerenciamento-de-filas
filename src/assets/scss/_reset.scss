@@ -1,5 +1,6 @@
 // ======================================== [IMPORTS]
 @import './Components/scroll';
+@import './Components/navbar';
 
 // ======================================== [RESET]
 // http://meyerweb.com/eric/tools/css/reset/
@@ -53,4 +54,11 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+
+@if ($navbarOn = true){
+  main, .navbarVertical{
+      margin-top: $heightNavbar;
+  }
 }

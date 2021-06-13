@@ -1,0 +1,33 @@
+// ======================================== [IMPORTS]
+@import '../colors';
+@import '../isFlex';
+@import '../isGrid';
+@import '../transition';
+@import '../shadow';
+@import '../Components/scroll';
+
+$navbarOn: true;
+$heightNavbar: 70px;
+
+.navbar {
+    @include is-flex(center, flex-start);
+    width: 100%;
+    height: $heightNavbar;
+    background-color: $color-1;
+    position: absolute;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    box-shadow: $shadow-2;
+    i{
+        color: white;
+    }
+    
+    .navbarContent {
+        padding: 0 1.5em;
+        @include is-flex(center, flex-start);
+        button{
+            @extend .mr-2;
+        }
+    }
+}

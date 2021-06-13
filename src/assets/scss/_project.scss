@@ -4,7 +4,9 @@
 @import './isGrid';
 @import './transition';
 @import './Components/navbarVertical';
+@import './Components/navbar';
 @import './Components/card';
+
 
 .secondPage, .thirdPage, .fourthPage{
     display: none;
@@ -67,4 +69,12 @@ body{
     font-weight: bold;
     font-size: 22px;
     margin-bottom: .2em;
+}
+
+.navbar{
+    .navBrand{
+        h1{
+            color: white;
+        }
+    }
 }
