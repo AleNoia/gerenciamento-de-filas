@@ -6,7 +6,7 @@ function Core() {
     function start() {
         getClicks();
         listingDesks();
-        getDesks();
+        create.checkIsFirst(url)
     }
 
     // Array que será enviado para o back
@@ -24,6 +24,7 @@ function Core() {
                 getDesks(el.value)
             }
             if (el.classList.contains('btnCaixa')) setType(el.value)
+            if (el.classList.contains('btnGetClient')) getClient(el.value)
             if (el.classList.contains('btnFinish')) finishService(el.value)
             if (el.classList.contains('enviar')) sendData()
         })
@@ -118,21 +119,7 @@ function Core() {
 
     async function getDesks(value) {
         let desks = await listingDesks()
-
-        let caixas = document.querySelector('.caixas')
-        caixas.innerHTML = ''
-
-        for (let key in desks) {
-            if (key == value) {
-                var obj = desks[key];
-                for (let desk in obj) {
-                    caixas.insertAdjacentHTML('beforeend', `
-                        <button class="btn btn-secondary btnCaixa" value=${obj[desk].type}>${obj[desk].nameDesk} - ${obj[desk].type}</button>                   
-                    `)
-                }
-            }
-        }
-
+        create.setDesks(desks, value)
     }
 
 

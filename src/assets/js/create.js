@@ -26,11 +26,9 @@ function create() {
         return localdate;
     }
 
-    // Retorna o caixa (gerado aleatoriamente)
+    // Definindo o caixa que o cliente será atendido
     function setCashier() {
-        let min = Math.ceil(0);
-        let max = Math.floor(10);
-        return zeroLeft(100, '00', Math.floor(Math.random() * (max - min + 1)) + min)
+       
     }
 
     // Insere as informações na terceira página 
@@ -56,7 +54,7 @@ function create() {
             fila = await getQueue(url)
             let arrayFila = fila.filter(function (value) {
                 if (value.id == data.id) {
-                    console.log(value)
+                    // console.log(value)
                     return value
                 }
             })
@@ -146,34 +144,66 @@ function create() {
         setQueueType('P', true)
     }
 
+    function checkIsFirst(queue, client) {
+        if(queue[0].id == client){
+            return true
+        } else{
+            return false
+        }
+    }
+
+    function isAdmin(client, fila){
+            return  `
+            <p class="senha">${client.hora}</p>
+            <p class="tit">Hora</p>
+            <p class="senha">${client.data}</p>
+            <p class="tit">Data</p>
+            
+            ${(()=>{
+                if(checkIsFirst(fila, client.id)){
+                    return `<button class="btn btn-secondary btnGetClient" value="${client.id}">Atender cliente</button>`
+                } else {
+                    return ``
+                }
+            })()}
+            
+            <button class="btn btn-secondary btnFinish" value="${client.id}">Finalizar atendimento</button>`
+        }
+    
 
     // Gerando o Painel de Acompanhamento
     function attendancePanel(fila, admin) {
         let groupTickets = document.querySelector('.groupTickets')
-        // console.log(fila)
         groupTickets.innerHTML = ''
         for (let client in fila) {
             groupTickets.insertAdjacentHTML('beforeend',
-                `<div class="client navItem">
+                `<div class="client navItem card">
                     <p class="senha">${fila[client].senha}</p>
                     <p class="tit">Senha</p>
+                ${(()=>{
+                    if(admin) return isAdmin(fila[client], fila)
+                    else return ``
+                })()}
 
-                    ${(()=>{
-                        if(admin){
-                           return `
-                           <p class="senha">${fila[client].hora}</p>
-                           <p class="tit">Hora</p>
-                           <p class="senha">${fila[client].data}</p>
-                           <p class="tit">Data</p>
-                           <button class="btn btn-secondary btnFinish" value="${fila[client].id}">Finalizar atendimento</button>
-                           `                           
-                        } else {
-                            return ``
-                        }
-                    })()}
+                </div>`
+            )
+        }
+    }
 
-                </div>
-                `)
+    // Gerando os caixas e mesas
+    function setDesks(desks, value) {
+        let caixas = document.querySelector('.caixas')
+        caixas.innerHTML = ''
+
+        for (let key in desks) {
+            if (key == value) {
+                let obj = desks[key];
+                for (let desk in obj) {
+                    caixas.insertAdjacentHTML('beforeend', `
+                        <button class="btn btn-secondary btnCaixa" value=${obj[desk].type}>${obj[desk].nameDesk} - ${obj[desk].type}</button>                   
+                    `)
+                }
+            }
         }
     }
 
@@ -192,6 +222,8 @@ function create() {
         setGeral,
         setQueueConvencional,
         setQueuePrioridade,
+        checkIsFirst,
+        setDesks,
     }
 
 }
