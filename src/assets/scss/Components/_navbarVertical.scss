@@ -11,7 +11,7 @@ body {
     @include is-flex(flex-start, flex-start);
 }
 
-main {
+.mainIndex {
     @extend .grid-8;
 }
 

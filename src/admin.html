@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BNC - Gerar senhar</title>
+    <title>BNC - Sessão administrativa</title>
     <link rel="stylesheet" href="./assets/scss/mainUseful.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Signika:wght@500;700&display=swap" rel="stylesheet">
@@ -22,74 +22,29 @@
                 <h1 class=""><i class="fas fa-university mr-1"></i>BNC</h1>
             </div>
             <div class="navbarContent">
-                <a href="./index.html"><button class="btn btn-secondary"><i class="fas fa-ticket-alt mr-2"></i>Gerar
-                        senha</button></a>
-                <a href="./admin.html"><button class="btn btn-secondary"><i
-                            class="fas fa-crown mr-2"></i>Admin</button></a>
+                <a href="./index.html"><button class="btn btn-secondary"><i class="fas fa-ticket-alt mr-2"></i>Gerar senha</button></a>
+                <a href="#"><button class="btn btn-secondary"><i class="fas fa-crown mr-2"></i>Admin</button></a>
             </div>
         </div>
     </nav>
 
-    <main class="mainIndex">
-        <section class="firstPage">
-            <div class="card">
-                <h1 class="mb-3">Informe o tipo de atendimento</h1>
-                <div class="buttonsGroup">
-                    <button class="btn btn-primary btnAtendimentoType mr-1" value="Convencional">Convencional</button>
-                    <button class="btn btn-primary btnAtendimentoType" value="Prioridade">Prioridade</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="secondPage">
-            <div class="card">
-                <h1 class="mb-3">Informe o setor para o atendimento</h1>
-                <div class="buttonsGroup">
-                    <button class="btn btn-primary btnAtendimento mr-1" value="Caixa">Caixa</button>
-                    <button class="btn btn-primary btnAtendimento mr-1" value="Guichê">Guichê</button>
-                    <button class="btn btn-primary btnAtendimento" value="Gerência">Gerência</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="thirdPage">
-            <div class="card">
-                <h1 class="mb-2">Gerar Ticket</h1>
-                <h2 class="mb-1">Setor</h2>
-                <p class="setor mb-2"></p>
-                <h2 class="mb-1">Tipo</h2>
-                <p class="tipo"></p>
-                <div class="buttonsGroup">
-                    <button class="btn btn-primary enviar">Gerar senha</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="fourthPage">
-            <div class="card">
-                <h1 class="mb-1">Atendimento finalizado</h1>
-                <h2>Ticket gerado</h2>
-                <p class="uuid"></p>
-            </div>
-        </section>
-    </main>
-
-    <nav class="navbarVertical">
-        <div class="navbarContent">
+    <main class="mainEmployee">
+        <div class="card">
             <div class="navBrand">
-                <h1>Painel de Acompanhamento</h1>
+                <h1>Sessão administrativa</h1>
             </div>
             <div class="options">
-                <button class="btn btn-secondary btnAcompanhamento" value="geral">Geral</button>
+                <button class="btn btn-secondary btnAcompanhamento" id="geral" value="geral">Geral</button>
                 <button class="btn btn-secondary btnAcompanhamento" value="caixa">Caixa</button>
                 <button class="btn btn-secondary btnAcompanhamento" value="guiche">Guichê</button>
                 <button class="btn btn-secondary btnAcompanhamento" value="gerencia">Gerência</button>
             </div>
-            <hr>
-            <ul class="namesList groupTickets">
-            </ul>
+            <div class="caixas">
+            </div>
         </div>
-    </nav>
+        <ul class="groupTickets">
+        </ul>
+    </main>
 
     <footer class="footer">
         <div class="column">

@@ -1,9 +1,10 @@
 // ======================================== [IMPORTS]
 @import '../shadow';
+@import '../Spacing/Padding';
 
 // ======================================== [CARD]
 .card {
-    padding: 1em 1.5em;
+    padding: 1.6em 1.5em;
     border-radius: 13px;
     margin-bottom: .8em;
     box-shadow: $shadow-1;

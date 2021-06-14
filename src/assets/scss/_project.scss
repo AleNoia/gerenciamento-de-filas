@@ -25,14 +25,12 @@ body{
 
 .buttonsGroup{
     @include is-flex(center, center);
-    // display: flex;
 }
 
 .firstPage, .secondPage{
     button{
         flex: 1;
         height: 250px;
-        // width: 40%;
         font-size: 28px;
         margin-bottom: .4em;
     }
@@ -52,7 +50,7 @@ body{
         font-size: 22px;
         opacity: .9;
     }
-
+    
     .buttonsGroup{
         @include is-flex(center, flex-end);
     }
@@ -60,7 +58,6 @@ body{
 
 
 .tit{
-    // font-weight: bold;
     margin-bottom: .3em;
     opacity: .8;
 }
@@ -78,3 +75,6 @@ body{
         }
     }
 }
+
+// ======================================== [EMPLOYEE]
+

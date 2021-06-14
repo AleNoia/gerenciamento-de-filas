@@ -48,8 +48,8 @@ function create() {
         let response = await fetch(url)
         return await response.json()
     }
-    
-    
+
+
     // Inserindo dados da fila nas páginas
     function setDataPages(url, fila, data, thirdPage) {
         setTimeout(async function () {
@@ -61,63 +61,117 @@ function create() {
                 }
             })
 
-            if(thirdPage) informations(arrayFila[0]) // gerando as informações na terceira página 
+            if (thirdPage) informations(arrayFila[0]) // gerando as informações na terceira página 
             attendancePanel(fila) // gerando o Painel de Acompanhamento
 
         }, 1000);
     }
 
+    // Iniciando página com o setor Geral selecionado
+    window.onload = function () {
+        // document.getElementById('geral').click();
+    }
+
+    let newQueueSetor // Fila filtrada pelo setor
+
     // Filtrando fila para um setor determinado
-    async function setQueue(url, setor, toPanel){
+    async function setQueue(url, setor, toPanel) {
+
         let fila = await getQueue(url)
 
-        function checkSenha(value){
+        // Função para filtragem
+        function checkTicketSetor(value) {
 
             let l1 = value.senha.split('')[0]
             let l2 = value.senha.split('')[1]
-            let letter = l1+l2
+            let letter = l1 + l2
 
             if (letter == setor) return value
         }
 
-        
-        let newFila = fila.filter(checkSenha)
 
-        if(toPanel) attendancePanel(newFila) // Para o painel de acompanhamento
-        
-        console.log(newFila)
-    }
-    
-    // Filtrando setor Caixa
-    async function setGeral(url){
-        attendancePanel(await getQueue(url))
+        newQueueSetor = fila.filter(checkTicketSetor) // Filtrando
+
+        if (toPanel) attendancePanel(newQueueSetor) // Para o painel de acompanhamento
     }
 
     // Filtrando setor Caixa
-    async function setQueueCaixa(url){
+    async function setGeral(url) {
+        newQueueSetor = await getQueue(url)
+        attendancePanel(newQueueSetor)
+    }
+
+    // Filtrando setor Caixa
+    async function setQueueCaixa(url) {
         setQueue(url, 'CX', true)
     }
-    
+
     // Filtrando setor Guichê
-    async function setQueueGuiche(url){
+    async function setQueueGuiche(url) {
         setQueue(url, 'GH', true)
     }
-    
+
     // Filtrando setor Gerencia
-    async function setQueueGerencia(url){
-         setQueue(url, 'GE', true)
+    async function setQueueGerencia(url) {
+        setQueue(url, 'GE', true)
     }
 
-    // Gera o Painel de Acompanhamento
-    function attendancePanel(fila) {
-        let groupClients = document.querySelector('.groupClients')
-        console.log(fila)
-        groupClients.innerHTML = ''
+
+
+    // Filtrando fila para um tipo determinado
+    function setQueueType(type, toPanel) {
+
+        // Função para filtragem
+        function checkTicketType(value) {
+
+            let typeTicket = value.senha.split('')[2]
+
+            if (typeTicket == type) return value
+        }
+
+
+        let newQueueType = newQueueSetor.filter(checkTicketType) // Filtrando
+
+        if (toPanel) attendancePanel(newQueueType, true) // Para o painel de acompanhamento
+
+    }
+
+    // Filtrando para o tipo Convencional
+    function setQueueConvencional() {
+        setQueueType('C', true)
+    }
+
+    // Filtrando para o tipo Prioridade
+    function setQueuePrioridade() {
+        setQueueType('P', true)
+    }
+
+
+    // Gerando o Painel de Acompanhamento
+    function attendancePanel(fila, admin) {
+        let groupTickets = document.querySelector('.groupTickets')
+        // console.log(fila)
+        groupTickets.innerHTML = ''
         for (let client in fila) {
-            groupClients.insertAdjacentHTML('beforeend',
+            groupTickets.insertAdjacentHTML('beforeend',
                 `<div class="client navItem">
                     <p class="senha">${fila[client].senha}</p>
                     <p class="tit">Senha</p>
+
+                    ${(()=>{
+                        if(admin){
+                           return `
+                           <p class="senha">${fila[client].hora}</p>
+                           <p class="tit">Hora</p>
+                           <p class="senha">${fila[client].data}</p>
+                           <p class="tit">Data</p>
+                           <button class="btn btn-secondary btnFinish" value="${fila[client].id}">Finalizar atendimento</button>
+                           `                           
+                        } else {
+                            return ``
+                        }
+                    })()}
+
                 </div>
                 `)
         }
@@ -135,7 +189,9 @@ function create() {
         setQueueCaixa,
         setQueueGuiche,
         setQueueGerencia,
-        setGeral
+        setGeral,
+        setQueueConvencional,
+        setQueuePrioridade,
     }
 
 }
