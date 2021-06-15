@@ -3,36 +3,61 @@ const create = generateCreate();
 
 function Core() {
 
+    // Variáveis para o envio de dados para o back
+    let data = new Object(); // Array que será enviado para o back
+    let number = 0 // Número para ticket
+    let queue //Array com a fila
+    let url = "http://localhost:5000/atendimento";
+    let urlDelete = "http://localhost:5000/delete";
+    let urlDesks = "http://localhost:5000/desks";
+
     function start() {
         getClicks();
         listingDesks();
-        create.checkIsFirst(url)
     }
-
-    // Array que será enviado para o back
-    let data = new Object();
 
 
     // Ouvindo os eventos
     function getClicks() {
         document.addEventListener('click', e => {
             const el = e.target
-            if (el.classList.contains('btnAtendimentoType')) getAtendimentoType(el.value)
-            if (el.classList.contains('btnAtendimento')) getAtendimentoSection(el.value)
-            if (el.classList.contains('btnAcompanhamento')) {
-                setSetor(el.value)
-                getDesks(el.value)
-            }
-            if (el.classList.contains('btnCaixa')) setType(el.value)
-            if (el.classList.contains('btnGetClient')) getClient(el.value)
-            if (el.classList.contains('btnFinish')) finishService(el.value)
+
+            // Pegando o tipo de atendimento
+            if (el.classList.contains('btnServiceType')) getServiceType(el.value)
+
+            // Pegando o setor de atendimento
+            if (el.classList.contains('btnService')) getServiceSection(el.value)
+
+            // Enviando dados do ticket o back
             if (el.classList.contains('enviar')) sendData()
+
+            // Filtra o painel de acompanhamento de acordo com o setor
+            if (el.classList.contains('btnAcompanhamento')) {
+                setSetor(el.value) // Filtra o painel de acompanhamento de acordo com o setor
+                getDesks(el.value) // Recebe no painel de acompanhamento as mesas/caixa (prioridade e convencional)
+            }
+            
+            // Filtrando fila de com o tipo de atendimento
+            if (el.classList.contains('btnCaixa')) {
+                setType(el.value) // Filtrando queue de com o tipo de Service
+                setDesk(el.id, el.value) // Criando o nome da mesa/caixa
+            }
+            
+            // Atendendo o cliente
+            if (el.classList.contains('btnGetClient')) getClient(el.value)
+            
+            // Finalizando o atendimento
+            if (el.classList.contains('btnFinish')) finishService(el.value)
         })
     }
 
+    
+    // Pengando informações da queue assim que o projeto for inciado
+    create.setDataPages(url, queue, data)   
+
 
     // Pegando o tipo de atendimento
-    function getAtendimentoType(value) {
+    function getServiceType(value) {
         data.tipo = value
 
         // Passando para a próxima página
@@ -42,7 +67,7 @@ function Core() {
 
 
     // Pegando o setor do atendimento
-    function getAtendimentoSection(value) {
+    function getServiceSection(value) {
         data.setor = value
 
         // Passando para a próxima página
@@ -52,30 +77,18 @@ function Core() {
     }
 
 
-    // Variáveis para o envio de dados para o back
-    let number = 0 // Número para ticket
-    let fila
-    let url = "http://localhost:5000/atendimento";
-    let urlDelete = "http://localhost:5000/delete";
-    let urlDesks = "http://localhost:5000/desks";
-
-
-    // Pengando informações da fila assim que o projeto for inciado
-    create.setDataPages(url, fila, data)
-
-
-    // Filtrando fila de acordo com o setor
+    // Filtrando queue de acordo com o setor
     function setSetor(value) {
         if (value === 'geral') create.setGeral(url)
-        if (value === 'caixa') create.setQueueCaixa(url, fila)
-        if (value === 'guiche') create.setQueueGuiche(url, fila)
-        if (value === 'gerencia') create.setQueueGerencia(url, fila)
+        if (value === 'caixa') create.setQueueCaixa(url, queue)
+        if (value === 'guiche') create.setQueueGuiche(url, queue)
+        if (value === 'gerencia') create.setQueueGerencia(url, queue)
     }
 
-    // Filtrando fila de com o tipo de atendimento
-    function setType(value) {
-        if (value === 'Convencional') create.setQueueConvencional(url)
-        if (value === 'Prioridade') create.setQueuePrioridade(url, fila)
+    // Filtrando queue de com o tipo de Service
+    function setType(value, idCaixa) {
+        if (value === 'Convencional') create.setQueueConvencional(url, idCaixa)
+        if (value === 'Prioridade') create.setQueuePrioridade(url, queue, idCaixa)
     }
 
 
@@ -84,7 +97,6 @@ function Core() {
         // Inserindo dados no array Data
         number += 1
         data.id = create.uuidv4(); // ID do ticket
-        data.caixa = create.setCashier(); // Caixa que o cliente irá
         data.data = create.date(); // Data da criação do ticket
         data.hora = create.hour(); // Hora da criação do ticket
 
@@ -97,7 +109,7 @@ function Core() {
             body: JSON.stringify(data)
         });
 
-        create.setDataPages(url, fila, data, true) // Atualizando dados da fila
+        create.setDataPages(url, queue, data, true) // Atualizando dados da queue
 
         // Passando para a próxima página
         document.querySelector('.thirdPage').style.display = 'none';
@@ -107,26 +119,54 @@ function Core() {
         setTimeout(function () {
             document.querySelector('.fourthPage').style.display = 'none';
             document.querySelector('.firstPage').style.display = 'initial';
-        }, 1000)
+        }, 500)
 
     }
 
 
-    async function listingDesks() {
-        let response = await fetch(urlDesks)
-        return await response.json()
-    }
-
+    // Recebendo todos as mesas/caixa
     async function getDesks(value) {
         let desks = await listingDesks()
         create.setDesks(desks, value)
     }
 
+    // Listando todas as mesas/caixa
+    async function listingDesks() {
+        let response = await fetch(urlDesks)
+        return await response.json()
+    }
 
-    // Finalizando atendimento
+    // Mesa/Caixa que o cliente irá  
+    let deskToAttend = {
+        desk_name: String,
+        client: String,
+    }
+
+    // Criando o nome da mesa/caixa
+    function setDesk(desk, type){
+        deskToAttend.desk_name = `${desk} - ${type}`
+    }
+
+    // Atendendo o clinete
+    function getClient(client){
+        deskToAttend.client = client
+        console.log(deskToAttend)
+
+        // Definindo a mesa/caixa que o cliente será atendido no back
+        fetch(urlDesks, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(deskToAttend)
+        });
+    }
+
+
+    // Finalizando Service
     function finishService(value) {
 
-        // Deletando atendimento no back
+        // Deletando Service no back
         fetch(urlDelete, {
             method: "DELETE",
             headers: {

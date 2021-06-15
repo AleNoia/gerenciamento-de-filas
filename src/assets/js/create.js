@@ -27,8 +27,8 @@ function create() {
     }
 
     // Definindo o caixa que o cliente será atendido
-    function setCashier() {
-       
+    function setDeskToAttend() {
+
     }
 
     // Insere as informações na terceira página 
@@ -52,6 +52,7 @@ function create() {
     function setDataPages(url, fila, data, thirdPage) {
         setTimeout(async function () {
             fila = await getQueue(url)
+            console.log(fila)
             let arrayFila = fila.filter(function (value) {
                 if (value.id == data.id) {
                     // console.log(value)
@@ -115,7 +116,6 @@ function create() {
     }
 
 
-
     // Filtrando fila para um tipo determinado
     function setQueueType(type, toPanel) {
 
@@ -144,16 +144,18 @@ function create() {
         setQueueType('P', true)
     }
 
+    // Verificando se o cliente é o primeiro
     function checkIsFirst(queue, client) {
-        if(queue[0].id == client){
+        if (queue[0].id == client) {
             return true
-        } else{
+        } else {
             return false
         }
     }
 
-    function isAdmin(client, fila){
-            return  `
+    // Verificando se é admin para gerar uma fila com dados 
+    function isAdmin(client, fila) {
+        return `
             <p class="senha">${client.hora}</p>
             <p class="tit">Hora</p>
             <p class="senha">${client.data}</p>
@@ -163,16 +165,27 @@ function create() {
                 if(checkIsFirst(fila, client.id)){
                     return `<button class="btn btn-secondary btnGetClient" value="${client.id}">Atender cliente</button>`
                 } else {
-                    return ``
+                    return `
+        `
                 }
             })()}
             
             <button class="btn btn-secondary btnFinish" value="${client.id}">Finalizar atendimento</button>`
-        }
+    }
+
     
 
+    // Inserindo mesa no painel de acompanhamento
+    function insertDesk(client){
+        return `
+        <p class="mesa">${client.mesa}</p>
+        <p class="tit">mesa</p>
+        `
+    }
+
+
     // Gerando o Painel de Acompanhamento
-    function attendancePanel(fila, admin) {
+    function attendancePanel(fila, admin, attend) {
         let groupTickets = document.querySelector('.groupTickets')
         groupTickets.innerHTML = ''
         for (let client in fila) {
@@ -180,11 +193,14 @@ function create() {
                 `<div class="client navItem card">
                     <p class="senha">${fila[client].senha}</p>
                     <p class="tit">Senha</p>
-                ${(()=>{
-                    if(admin) return isAdmin(fila[client], fila)
-                    else return ``
-                })()}
-
+                    ${(()=>{
+                        if(attend) return insertDesk(fila[client])
+                        else return ``
+                    })()}
+                    ${(()=>{
+                        if(admin) return isAdmin(fila[client], fila)
+                        else return ``
+                    })()}
                 </div>`
             )
         }
@@ -200,7 +216,7 @@ function create() {
                 let obj = desks[key];
                 for (let desk in obj) {
                     caixas.insertAdjacentHTML('beforeend', `
-                        <button class="btn btn-secondary btnCaixa" value=${obj[desk].type}>${obj[desk].nameDesk} - ${obj[desk].type}</button>                   
+                        <button class="btn btn-secondary btnCaixa" id="${obj[desk].nameDesk}" value=${obj[desk].type}>${obj[desk].nameDesk} - ${obj[desk].type}</button>                   
                     `)
                 }
             }
@@ -211,7 +227,7 @@ function create() {
         uuidv4,
         date,
         hour,
-        setCashier,
+        setDeskToAttend,
         zeroLeft,
         informations,
         attendancePanel,
