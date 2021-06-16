@@ -11,7 +11,7 @@ body {
     @include is-flex(flex-start, flex-start);
 }
 
-.mainIndex {
+.mainIndex, .mainEmployee{
     @extend .grid-8;
 }
 
@@ -47,6 +47,7 @@ body {
     }
 
     .navbarContent {
+        padding-top: .8em;
         padding-right: 17px;
         min-height: 100vh;
     }
@@ -67,28 +68,25 @@ body {
         }
     }
 
-    // ========== [OPTIONS]
-    .options{
-        margin-bottom: .8em;    
-        display: flex;
+    
+    // ========== [ITEM]
+
+    .navItem{
+        margin-bottom: .8em;
         flex: 1;
-        // flex-wrap: wrap;
-        
-        .btn-secondary{
-            width: 100%;
-            margin-right: .4em;
-            padding: 0 0;
-            // background-color: $color-7;
+        .buttonsGroup{
+            @include is-flex(center, flex-end);
         }
     }
 
-    // ========== [ITEM]
-    .navItem {
-        padding: 1em;
-        height: 100%;
-        border-radius: 10px;
-        margin-bottom: .8em;
-        background-color: $color-5;
+    .list{
+        .navItem {
+            padding: 1em;
+            height: 100%;
+            border-radius: 10px;
+            margin-bottom: .8em;
+            background-color: $color-5;
+        }
     }
 
     // ========== [WHEN THE ITEM IS ACTIVE]

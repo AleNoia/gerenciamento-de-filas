@@ -30,23 +30,23 @@
 }
 
 // ========== [PRIMARY]
-.btn-primary {
+.btn-cad {
     background-image: $gradient-1;
 }
 
-// ========== [SECONDARY]
-.btn-secondary {
+// ========== [primary]
+.btn-primary {
     background-color: $color-7;
 }
 
 // ========== [SUCCESS]
-.btn-success {
-    background-image: $color-success;
+.btn-secondary {
+    background-color: $color-8;
 }
 
 // ========== [DANGER]
 .btn-danger {
-    background-image: $color-danger;
+    background-color: $color-danger;
 }
 
 // ========== [TO UP]
@@ -64,5 +64,19 @@
     &:active {
         transform: scale(0.99);
         outline: none;
+    }
+}
+
+// ========== [OPTIONS]
+.options{
+    margin-bottom: .8em;
+    display: flex;
+    flex: 1;
+    
+    .btn-primary, .btn-secondary{
+        width: 100%;
+        margin-right: .4em;
+        padding: 0 0;
+        // background-color: $color-7;
     }
 }

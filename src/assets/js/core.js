@@ -7,8 +7,7 @@ function Core() {
     let data = new Object(); // Array que será enviado para o back
     let number = 0 // Número para ticket
     let queue //Array com a fila
-    let url = "http://localhost:5000/atendimento";
-    let urlDelete = "http://localhost:5000/delete";
+    let url = "http://localhost:5000/service";
     let urlDesks = "http://localhost:5000/desks";
 
     function start() {
@@ -36,10 +35,16 @@ function Core() {
                 setSetor(el.value) // Filtra o painel de acompanhamento de acordo com o setor
                 getDesks(el.value) // Recebe no painel de acompanhamento as mesas/caixa (prioridade e convencional)
             }
+
+            // Filtra o painel de acompanhamento de acordo com o tipo (sem admin)
+            if (el.classList.contains('btnOptionType')) {
+                setType(el.value, false) // Filtra o painel de acompanhamento de acordo com o setor
+                // getDesks(el.value) // Recebe no painel de acompanhamento as mesas/caixa (prioridade e convencional)
+            }
             
-            // Filtrando fila de com o tipo de atendimento
+            // Filtrando fila de com o tipo de caixa (com admin)
             if (el.classList.contains('btnCaixa')) {
-                setType(el.value) // Filtrando queue de com o tipo de Service
+                setType(el.value, true) // Filtrando queue de com o tipo de Service
                 setDesk(el.id, el.value) // Criando o nome da mesa/caixa
             }
             
@@ -51,7 +56,7 @@ function Core() {
         })
     }
 
-    
+
     // Pengando informações da queue assim que o projeto for inciado
     create.setDataPages(url, queue, data)   
 
@@ -86,9 +91,9 @@ function Core() {
     }
 
     // Filtrando queue de com o tipo de Service
-    function setType(value, idCaixa) {
-        if (value === 'Convencional') create.setQueueConvencional(url, idCaixa)
-        if (value === 'Prioridade') create.setQueuePrioridade(url, queue, idCaixa)
+    function setType(value, admin) {
+        if (value === 'Convencional') create.setQueueConvencional(admin)
+        if (value === 'Prioridade') create.setQueuePrioridade(admin)
     }
 
 
@@ -119,7 +124,7 @@ function Core() {
         setTimeout(function () {
             document.querySelector('.fourthPage').style.display = 'none';
             document.querySelector('.firstPage').style.display = 'initial';
-        }, 500)
+        }, 7000)
 
     }
 
@@ -147,12 +152,12 @@ function Core() {
         deskToAttend.desk_name = `${desk} - ${type}`
     }
 
-    // Atendendo o clinete
-    function getClient(client){
-        deskToAttend.client = client
-        console.log(deskToAttend)
+    // Atendendo o clinete  
+    function getClient(clientId){
+        deskToAttend.client = clientId
+        console.log(clientId)
 
-        // Definindo a mesa/caixa que o cliente será atendido no back
+        // Definindo a mesa/caixa que o cliente será atendido (no back)
         fetch(urlDesks, {
             method: "POST",
             headers: {
@@ -160,21 +165,13 @@ function Core() {
             },
             body: JSON.stringify(deskToAttend)
         });
+
     }
 
 
     // Finalizando Service
-    function finishService(value) {
-
-        // Deletando Service no back
-        fetch(urlDelete, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(value)
-        });
-
+    function finishService(clientId) {
+        deleteClientQueue(clientId)
     }
 
 

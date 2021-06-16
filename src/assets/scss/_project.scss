@@ -17,7 +17,7 @@
 }
 
 main{
-    padding: 4em;
+    padding: 2em 4em;
 }
 body{
     background-color: $color-4;
@@ -55,16 +55,23 @@ body{
         @include is-flex(center, flex-end);
     }
 }
-
-
+.fourthPage{
+    .tit{
+        opacity: .8;
+    }
+}
 .tit{
-    margin-bottom: .3em;
+    font-size: 22px;
+    // font-weight: bold;
+}
+.subTit{
+    margin: .2em 0 .3em;
     opacity: .8;
 }
 
 .senha{
+    font-size: 26px;
     font-weight: bold;
-    font-size: 22px;
     margin-bottom: .2em;
 }
 
@@ -76,5 +83,7 @@ body{
     }
 }
 
-// ======================================== [EMPLOYEE]
+// ======================================== [ADMIN]
+.mainEmployee{
+}
 

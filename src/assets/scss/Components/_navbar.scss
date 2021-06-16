@@ -19,15 +19,23 @@ $heightNavbar: 70px;
     z-index: 999;
     top: 0;
     box-shadow: $shadow-2;
-    i{
+
+    i {
         color: white;
     }
-    
+
     .navbarContent {
+        width: 100%;
         padding: 0 1.5em;
         @include is-flex(center, flex-start);
-        button{
+
+        button {
             @extend .mr-2;
+        }
+
+        .navbarContentMain {
+            width: 90%;
+            @include is-flex(center, space-between);
         }
     }
 }

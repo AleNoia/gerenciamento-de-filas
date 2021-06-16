@@ -1,4 +1,7 @@
 function create() {
+    
+    let url = "http://localhost:5000/service";
+
     // Gera o ID
     function uuidv4() {
         return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
@@ -61,7 +64,7 @@ function create() {
             })
 
             if (thirdPage) informations(arrayFila[0]) // gerando as informações na terceira página 
-            attendancePanel(fila) // gerando o Painel de Acompanhamento
+            attendancePanel(fila, false) // gerando o Painel de Acompanhamento
 
         }, 1000);
     }
@@ -117,7 +120,7 @@ function create() {
 
 
     // Filtrando fila para um tipo determinado
-    function setQueueType(type, toPanel) {
+    function setQueueType(type, toPanel, admin) {
 
         // Função para filtragem
         function checkTicketType(value) {
@@ -130,47 +133,57 @@ function create() {
 
         let newQueueType = newQueueSetor.filter(checkTicketType) // Filtrando
 
-        if (toPanel) attendancePanel(newQueueType, true) // Para o painel de acompanhamento
+        if (toPanel) attendancePanel(newQueueType, admin) // Para o painel de acompanhamento
+
+    }
+
+    function filter(value){
 
     }
 
     // Filtrando para o tipo Convencional
-    function setQueueConvencional() {
-        setQueueType('C', true)
+    function setQueueConvencional(admin) {
+        setQueueType('C', true, admin)
     }
 
     // Filtrando para o tipo Prioridade
-    function setQueuePrioridade() {
-        setQueueType('P', true)
+    function setQueuePrioridade(admin) {
+        setQueueType('P', true, admin)
     }
 
     // Verificando se o cliente é o primeiro
     function checkIsFirst(queue, client) {
-        if (queue[0].id == client) {
-            return true
-        } else {
-            return false
-        }
+        if (queue[0].id == client) return true          
+        else return false
+    }
+
+    // Verificando se o cliente foi chamado para o atendimento
+    function checkAttend(client) {
+        if(client.mesa) return true        
+        return false
     }
 
     // Verificando se é admin para gerar uma fila com dados 
     function isAdmin(client, fila) {
         return `
-            <p class="senha">${client.hora}</p>
-            <p class="tit">Hora</p>
-            <p class="senha">${client.data}</p>
-            <p class="tit">Data</p>
+            <p class="tit mt-1">${client.hora}</p>
+            <p class="subTit">Hora</p>
+            <p class="tit mt-1">${client.data}</p>
+            <p class="subTit">Data</p>
             
-            ${(()=>{
-                if(checkIsFirst(fila, client.id)){
-                    return `<button class="btn btn-secondary btnGetClient" value="${client.id}">Atender cliente</button>`
-                } else {
-                    return `
-        `
-                }
-            })()}
+            <div class="buttonsGroup mt-3">
+            <button class="btn btn-danger btnFinish mr-1" value="${client.id}">Finalizar</button>
+                ${(()=>{
+                    if(checkIsFirst(fila, client.id)){
+                        return `<button class="btn btn-primary btnGetClient" value="${client.id}">Atender cliente</button>`
+                    } else {
+                        return `
+            `
+                    }
+                })()}
+                
+            </div>`
             
-            <button class="btn btn-secondary btnFinish" value="${client.id}">Finalizar atendimento</button>`
     }
 
     
@@ -178,23 +191,37 @@ function create() {
     // Inserindo mesa no painel de acompanhamento
     function insertDesk(client){
         return `
-        <p class="mesa">${client.mesa}</p>
-        <p class="tit">mesa</p>
+        <h2 class="tit mt-2">${client.mesa}</h2>
+        <p class="subTit">Mesa/Caixa</p>
         `
+    }
+
+    // Apagando ticket no painel de acompanhamento
+    function deleteClientQueue(client){
+        // Deletando ticket no back
+        alert('Deletando')
+        fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(client) // Passando ID do ticket para deletar
+        });
     }
 
 
     // Gerando o Painel de Acompanhamento
-    function attendancePanel(fila, admin, attend) {
+    function attendancePanel(fila, admin) {
         let groupTickets = document.querySelector('.groupTickets')
         groupTickets.innerHTML = ''
         for (let client in fila) {
+            if(fila[client].mesa)  setTimeout(deleteClientQueue(fila[client].id), 45000)
             groupTickets.insertAdjacentHTML('beforeend',
                 `<div class="client navItem card">
                     <p class="senha">${fila[client].senha}</p>
-                    <p class="tit">Senha</p>
+                    <p class="subTit">Senha</p>
                     ${(()=>{
-                        if(attend) return insertDesk(fila[client])
+                        if(checkAttend(fila[client])) return insertDesk(fila[client])
                         else return ``
                     })()}
                     ${(()=>{
@@ -240,6 +267,9 @@ function create() {
         setQueuePrioridade,
         checkIsFirst,
         setDesks,
+        filter,
+        getQueue,
+        deleteClientQueue,
     }
 
 }

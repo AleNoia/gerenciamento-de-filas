@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BNC - Sessão administrativa</title>
+    <Title>BNC - Sessão administrativa</Title>
     <link rel="stylesheet" href="./assets/scss/mainUseful.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Signika:wght@500;700&display=swap" rel="stylesheet">
@@ -21,36 +21,44 @@
             <div class="navBrand mr-4">
                 <h1 class=""><i class="fas fa-university mr-1"></i>BNC</h1>
             </div>
-            <div class="navbarContent">
-                <a href="./index.html"><button class="btn btn-secondary"><i class="fas fa-ticket-alt mr-2"></i>Gerar senha</button></a>
-                <a href="#"><button class="btn btn-secondary"><i class="fas fa-crown mr-2"></i>Admin</button></a>
+            <div class="navbarContentMain">
+                <div class="contentStart">
+                    <a href="./panel.html"><button class="btn btn-primary"><i
+                                class="fas fa-tv mr-2"></i>Painel</button></a>
+                    <a href="./index.html"><button class="btn btn-primary"><i class="fas fa-ticket-alt mr-2"></i>Gerar
+                            senha</button></a>
+                </div>
+                <div class="contentEnd">
+                    <a href="./admin.html"><button class="btn btn-primary"><i
+                                class="fas fa-crown mr-2"></i>Admin</button></a>
+                </div>
             </div>
         </div>
     </nav>
 
     <nav class="navbarVertical">
         <div class="navbarContent">
-            <div class="navBrand">
+            <div class="navItem">
                 <h1>Painel de Acompanhamento</h1>
             </div>
             <hr>
-            <ul class="groupTickets">
+            <ul class="list groupTickets">
             </ul>
         </div>
     </nav>
 
     <main class="mainEmployee">
         <div class="card">
-            <div class="navBrand">
+            <div class="mb-3">
                 <h1>Sessão administrativa</h1>
             </div>
             <div class="options">
-                <button class="btn btn-secondary btnAcompanhamento" id="geral" value="geral">Geral</button>
-                <button class="btn btn-secondary btnAcompanhamento" value="caixa">Caixa</button>
-                <button class="btn btn-secondary btnAcompanhamento" value="guiche">Guichê</button>
-                <button class="btn btn-secondary btnAcompanhamento" value="gerencia">Gerência</button>
+                <button class="btn btn-primary btnAcompanhamento" id="geral" value="geral">Geral</button>
+                <button class="btn btn-primary btnAcompanhamento" value="caixa">Caixa</button>
+                <button class="btn btn-primary btnAcompanhamento" value="guiche">Guichê</button>
+                <button class="btn btn-primary btnAcompanhamento" value="gerencia">Gerência</button>
             </div>
-            <div class="caixas">
+            <div class="caixas options">
             </div>
         </div>
     </main>
@@ -62,31 +70,31 @@
         </div>
         <div class="column">
             <h1>Banco Nosso Crédito</h1>
-            <h3 class="tit">Endereço</h3>
+            <h3 class="subTit">Endereço</h3>
             <h2 class="mb-1">Av. Principal Nº 100, Centro</h2>
-            <h3 class="tit">Fone</h3>
+            <h3 class="subTit">Fone</h3>
             <h2>(86) 9 3223-3232</h2>
         </div>
         <div class="column">
             <h1>Desenvolvedores</h1>
             <div class="mb-3">
                 <h2 class="mb-1">Alexandre Igor Noia Lacerda Silva</h2>
-                <h3 class="tit">Matrícula</h3>
+                <h3 class="subTit">Matrícula</h3>
                 <h2>201908412534</h2>
             </div>
             <div class="mb-3">
                 <h2 class="mb-1">Vitor Kassiel Araujo Almeida</h2>
-                <h3 class="tit">Matrícula</h3>
+                <h3 class="subTit">Matrícula</h3>
                 <h2>201908354488 </h2>
             </div>
             <div class="mb-3">
                 <h2 class="mb-1">Marcus Vinicius Silva Souza</h2>
-                <h3 class="tit">Matrícula</h3>
+                <h3 class="subTit">Matrícula</h3>
                 <h2>201908354356 </h2>
             </div>
             <div class="mb-3">
                 <h2 class="mb-1">Raquel Martins Nunes</h2>
-                <h3 class="tit">Matrícula</h3>
+                <h3 class="subTit">Matrícula</h3>
                 <h2>201908343222</h2>
             </div>
         </div>
