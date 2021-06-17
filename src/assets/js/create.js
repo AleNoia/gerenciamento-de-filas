@@ -29,11 +29,6 @@ function create() {
         return localdate;
     }
 
-    // Definindo o caixa que o cliente será atendido
-    function setDeskToAttend() {
-
-    }
-
     // Insere as informações na terceira página 
     function informations(arrayFila) {
         // document.querySelector('.uuid').innerHTML = arrayFila.id
@@ -250,11 +245,20 @@ function create() {
         }
     }
 
+    async function ticket(url, clientId){
+        let fila = await getQueue(url)
+        for( let key in fila){
+            if(fila[key].id == clientId){
+                return fila[key]
+            }
+        }
+    }
+
     return {
         uuidv4,
         date,
         hour,
-        setDeskToAttend,
+        // setDeskToAttend,
         zeroLeft,
         informations,
         attendancePanel,
@@ -270,6 +274,7 @@ function create() {
         filter,
         getQueue,
         deleteClientQueue,
+        ticket,
     }
 
 }

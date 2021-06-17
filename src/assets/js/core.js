@@ -41,16 +41,16 @@ function Core() {
                 setType(el.value, false) // Filtra o painel de acompanhamento de acordo com o setor
                 // getDesks(el.value) // Recebe no painel de acompanhamento as mesas/caixa (prioridade e convencional)
             }
-            
+
             // Filtrando fila de com o tipo de caixa (com admin)
             if (el.classList.contains('btnCaixa')) {
                 setType(el.value, true) // Filtrando queue de com o tipo de Service
                 setDesk(el.id, el.value) // Criando o nome da mesa/caixa
             }
-            
+
             // Atendendo o cliente
             if (el.classList.contains('btnGetClient')) getClient(el.value)
-            
+
             // Finalizando o atendimento
             if (el.classList.contains('btnFinish')) finishService(el.value)
         })
@@ -58,7 +58,7 @@ function Core() {
 
 
     // Pengando informações da queue assim que o projeto for inciado
-    create.setDataPages(url, queue, data)   
+    create.setDataPages(url, queue, data)
 
 
     // Pegando o tipo de atendimento
@@ -115,6 +115,13 @@ function Core() {
         });
 
         create.setDataPages(url, queue, data, true) // Atualizando dados da queue
+         
+        setTimeout(async function () {
+            let dataTicket = await create.ticket(url, data.id)
+            console.log(dataTicket)
+        }, 1000)
+        
+
 
         // Passando para a próxima página
         document.querySelector('.thirdPage').style.display = 'none';
@@ -148,12 +155,12 @@ function Core() {
     }
 
     // Criando o nome da mesa/caixa
-    function setDesk(desk, type){
+    function setDesk(desk, type) {
         deskToAttend.desk_name = `${desk} - ${type}`
     }
 
     // Atendendo o clinete  
-    function getClient(clientId){
+    function getClient(clientId) {
         deskToAttend.client = clientId
         console.log(clientId)
 
