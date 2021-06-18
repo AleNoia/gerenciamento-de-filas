@@ -74,7 +74,7 @@ O arquivo ```index.js``` inicia a aplicação e lida com possíveis erros.
 ***
 # <a name="TechnologiesUsed"></a> ⚙ Tecnologias usadas
 
-As tecnologias usadas neste projeto:
+As tecnologias e linguagens usadas neste projeto:
 
 - [Python](https://www.python.org)
 - [Flask](https://www.codecademy.com/learn/paths/build-python-web-apps-flask?g_network=g&g_device=c&g_adid=527019219096&g_keyword=%2Bpython%20%2Bweb%20%2Bapps%20%2Bflask&g_campaign=ROW+Skill+Path%3A+Pro+-+Broad&g_acctid=243-039-7011&g_adtype=search&g_adgroupid=120879017973&g_keywordid=kwd-1122535322832&g_campaignid=12791857679&utm_id=t_kwd-1122535322832:ag_120879017973:cp_12791857679:n_g:d_c&utm_term=%2Bpython%20%2Bweb%20%2Bapps%20%2Bflask&utm_campaign=ROW%20Skill%20Path%3A%20Pro%20-%20Broad&utm_source=google&utm_medium=paid-search&utm_content=527019219096&hsa_acc=2430397011&hsa_cam=12791857679&hsa_grp=120879017973&hsa_ad=527019219096&hsa_src=g&hsa_tgt=kwd-1122535322832&hsa_kw=%2Bpython%20%2Bweb%20%2Bapps%20%2Bflask&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwiLGGBhAqEiwAgq3q_kIWtiGgK4YJnGmDuyIVcRKerqQFsiYjbWDetDibo0-Gdb2gI9a_ORoCgfgQAvD_BwE)
