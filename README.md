@@ -18,7 +18,7 @@
 ***
 # 📌 Índice
 * 💡 [Funcionalidades](#features)
-* 🛠 [Instação](#Installation)
+* 🛠 [Instalação](#Installation)
 * 📝 [Utilização](#Utilization)
 * 🤝 [Contribuição](#Contributing) 
 * ⚙ [Tecnologias e linguagens utilizadas](#TechnologiesUsed)
@@ -33,7 +33,7 @@
 
 ***
 
-# <a name="Installation"></a>🛠 Instação
+# <a name="Installation"></a>🛠 Instalação
 
 Você precisa fazer o download do [git](https://git-scm.com) incialmente
 
