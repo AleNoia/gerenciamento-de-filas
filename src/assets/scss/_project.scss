@@ -101,7 +101,7 @@ body{
     @include is-flex(center, flex-start);
     box-shadow: $shadow-1;
     border-radius: 13px;
-    background-color: $color-1;
+    background-image: $gradient-3;
     padding: 2em;
     & *{
         color: white;
@@ -113,10 +113,10 @@ body{
             margin-bottom: .2em;
         }
         h1{
-            font-size: 40px;
+            font-size: 35px;
         }
         h2{
-            font-size: 25px;
+            font-size: 20px;
         }
         @include is-flex-column(center, flex-start);
     }
@@ -131,7 +131,7 @@ body{
         }
         .id{
             margin-top: .4em;
-            font-size: 20px !important;
+            font-size: 17px !important;
         }
         .titTicket{
             font-size: 25px;
@@ -149,7 +149,7 @@ body{
             width: 100%;
         }
         .senha{
-            font-size: 50px;
+            font-size: 45px;
         }
     }
 }

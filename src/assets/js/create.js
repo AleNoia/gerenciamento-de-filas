@@ -1,5 +1,5 @@
 function create() {
-    
+
     let url = "http://localhost:5000/service";
 
     // Gera o ID
@@ -64,9 +64,18 @@ function create() {
         }, 1000);
     }
 
+    onloadGeral()
+    
+    // Iniciando página com o setor Geral selecionado
+    function onloadGeral() {
+        window.onload = function () {
+            document.getElementById('geral').click();
+        }
+    }
+
     // Iniciando página com o setor Geral selecionado
     window.onload = function () {
-        // document.getElementById('geral').click();
+        document.getElementById('geral').click();
     }
 
     let newQueueSetor // Fila filtrada pelo setor
@@ -132,7 +141,7 @@ function create() {
 
     }
 
-    function filter(value){
+    function filter(value) {
 
     }
 
@@ -148,13 +157,13 @@ function create() {
 
     // Verificando se o cliente é o primeiro
     function checkIsFirst(queue, client) {
-        if (queue[0].id == client) return true          
+        if (queue[0].id == client) return true
         else return false
     }
 
     // Verificando se o cliente foi chamado para o atendimento
     function checkAttend(client) {
-        if(client.mesa) return true        
+        if (client.mesa) return true
         return false
     }
 
@@ -173,18 +182,18 @@ function create() {
                         return `<button class="btn btn-primary btnGetClient" value="${client.id}">Atender cliente</button>`
                     } else {
                         return `
-            `
+        `
                     }
                 })()}
                 
             </div>`
-            
+
     }
 
-    
+
 
     // Inserindo mesa no painel de acompanhamento
-    function insertDesk(client){
+    function insertDesk(client) {
         return `
         <h2 class="tit mt-2">${client.mesa}</h2>
         <p class="subTit">Mesa/Caixa</p>
@@ -192,9 +201,8 @@ function create() {
     }
 
     // Apagando ticket no painel de acompanhamento
-    function deleteClientQueue(client){
+    function deleteClientQueue(client) {
         // Deletando ticket no back
-        alert('Deletando')
         fetch(url, {
             method: "DELETE",
             headers: {
@@ -210,7 +218,13 @@ function create() {
         let groupTickets = document.querySelector('.groupTickets')
         groupTickets.innerHTML = ''
         for (let client in fila) {
-            if(fila[client].mesa)  setTimeout(deleteClientQueue(fila[client].id), 45000)
+
+            // Se na fila tiver alguem com a mesa definida, ele será deletado depois de um tempo
+            setTimeout(function () {
+                if (fila[client].mesa) deleteClientQueue(fila[client].id)
+                attendancePanel(getQueue(url), false)
+            }, 30000)
+
             groupTickets.insertAdjacentHTML('beforeend',
                 `<div class="client navItem card">
                     <p class="senha">${fila[client].senha}</p>
@@ -239,16 +253,41 @@ function create() {
                 for (let desk in obj) {
                     caixas.insertAdjacentHTML('beforeend', `
                         <button class="btn btn-secondary btnCaixa" id="${obj[desk].nameDesk}" value=${obj[desk].type}>${obj[desk].nameDesk} - ${obj[desk].type}</button>                   
-                    `)
+                        `)
                 }
             }
         }
     }
 
-    async function ticket(url, clientId){
+    function insertDataTicket(client) {
+        let senhaHtml = document.querySelector('.senhaTicket')
+        let setorHtml = document.querySelector('.setorTicket')
+        let horaHtml = document.querySelector('.horaTicket')
+        let dataHtml = document.querySelector('.dataTicket')
+        let idHtml = document.querySelector('.idTicket')
+        let typeServiceHtml = document.querySelector('.typeTicket')
+
+        senhaHtml.innerHTML = ''
+        setorHtml.innerHTML = ''
+        horaHtml.innerHTML = ''
+        dataHtml.innerHTML = ''
+        idHtml.innerHTML = ''
+        typeServiceHtml.innerHTML = ''
+
+        senhaHtml.insertAdjacentHTML('beforeend', client.senha)
+        setorHtml.insertAdjacentHTML('beforeend', client.setor)
+        horaHtml.insertAdjacentHTML('beforeend', client.hora)
+        dataHtml.insertAdjacentHTML('beforeend', client.data)
+        idHtml.insertAdjacentHTML('beforeend', client.id)
+        typeServiceHtml.insertAdjacentHTML('beforeend', client.tipo)
+        console.log(client.setor)
+    }
+
+    async function ticket(url, clientId) {
         let fila = await getQueue(url)
-        for( let key in fila){
-            if(fila[key].id == clientId){
+        for (let key in fila) {
+            if (fila[key].id == clientId) {
+                insertDataTicket(fila[key])
                 return fila[key]
             }
         }
@@ -275,6 +314,7 @@ function create() {
         getQueue,
         deleteClientQueue,
         ticket,
+        onloadGeral,
     }
 
 }

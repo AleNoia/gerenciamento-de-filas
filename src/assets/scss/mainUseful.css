@@ -1929,7 +1929,8 @@ body {
   -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
           box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
   border-radius: 13px;
-  background-color: #08A0EB;
+  background-image: -webkit-gradient(linear, right bottom, left top, from(#0077b6), color-stop(#008cc4), color-stop(#06a1d0), color-stop(#2ab5db), to(#48cae4));
+  background-image: linear-gradient(to left top, #0077b6, #008cc4, #06a1d0, #2ab5db, #48cae4);
   padding: 2em;
 }
 
@@ -1960,11 +1961,11 @@ body {
 }
 
 .ticket .brand h1 {
-  font-size: 40px;
+  font-size: 35px;
 }
 
 .ticket .brand h2 {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .ticket .info {
@@ -1993,7 +1994,7 @@ body {
 
 .ticket .info .id {
   margin-top: .4em;
-  font-size: 20px !important;
+  font-size: 17px !important;
 }
 
 .ticket .info .titTicket {
@@ -2046,6 +2047,6 @@ body {
 }
 
 .ticket .info .senha {
-  font-size: 50px;
+  font-size: 45px;
 }
 /*# sourceMappingURL=mainUseful.css.map */

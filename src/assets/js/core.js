@@ -51,7 +51,7 @@ function Core() {
             // Atendendo o cliente
             if (el.classList.contains('btnGetClient')) getClient(el.value)
 
-            // Finalizando o atendimento
+            // Finalizando o atendimeticketto
             if (el.classList.contains('btnFinish')) finishService(el.value)
         })
     }
@@ -115,15 +115,15 @@ function Core() {
         });
 
         create.setDataPages(url, queue, data, true) // Atualizando dados da queue
-         
+
+
         setTimeout(async function () {
             let dataTicket = await create.ticket(url, data.id)
             console.log(dataTicket)
         }, 1000)
-        
 
 
-        // Passando para a próxima página
+        // Passando para a próxima página de ticket gerado
         document.querySelector('.thirdPage').style.display = 'none';
         document.querySelector('.fourthPage').style.display = 'initial';
 
@@ -131,7 +131,11 @@ function Core() {
         setTimeout(function () {
             document.querySelector('.fourthPage').style.display = 'none';
             document.querySelector('.firstPage').style.display = 'initial';
-        }, 7000)
+
+            // Iniciando página com o setor Geral selecionado
+            create.onloadGeral()
+
+        }, 10000)
 
     }
 
@@ -178,7 +182,7 @@ function Core() {
 
     // Finalizando Service
     function finishService(clientId) {
-        deleteClientQueue(clientId)
+        create.deleteClientQueue(clientId)
     }
 
 
