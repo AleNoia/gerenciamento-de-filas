@@ -12,13 +12,10 @@ $color-8: #0FB9AF;
 $gradient-1:  linear-gradient(to right top, #35a293, #00a3ab, #00a2c4, #009fda, #0598e9);
 $gradient-2: linear-gradient(to left right, #35a293, #00a3ab, #00a2c4, #009fda, #0598e9);
 $gradient-3:  linear-gradient(to left top, #0077b6, #008cc4, #06a1d0, #2ab5db, #48cae4);
-$gradient-border-1: linear-gradient(to right bottom, hsla(0, 0%, 100%, 0), hsl(0, 0%, 100%)) 1;
 $gradient-border-2: linear-gradient(to left top, #9EF5FF, #23B1D9) 1;
 
 // ======================================== [COLORS BUTTONS]
 
 $color-primary: linear-gradient(to right bottom, #0069d9, #1374e1, #2280ea, #2f8bf1, #3b97f9);
-$color-primary: hsla(0, 0%, 100%, 0);
 $color-success: linear-gradient(to right bottom, #00b027, #09ba2f, #11c536, #17cf3e, #1cda45);
-// $color-danger: linear-gradient(to right bottom, #c82333, #d53341, #e1424f, #ed505d, #f95d6c);
 $color-danger: #e1424f;
