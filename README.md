@@ -21,7 +21,7 @@
 * 🛠 [Instação](#Installation)
 * 📝 [Utilização](#Utilization)
 * 🤝 [Contribuição](#Contributing) 
-* ⚙ [Tecnologias utilizadas](#TechnologiesUsed)
+* ⚙ [Tecnologias e linguagens utilizadas](#TechnologiesUsed)
 * 🧾 [Licença](#License)
 ***
 
@@ -72,7 +72,7 @@ O arquivo ```index.js``` inicia a aplicação e lida com possíveis erros.
 ![image](https://user-images.githubusercontent.com/82424777/122567926-94909900-d01f-11eb-8d19-2807c38da49e.png)
 
 ***
-# <a name="TechnologiesUsed"></a> ⚙ Tecnologias usadas
+# <a name="TechnologiesUsed"></a> ⚙ Tecnologias e linguagens usadas
 
 As tecnologias e linguagens usadas neste projeto:
 
